@@ -1,31 +1,23 @@
 {
-  "name": "alpha-react",
+  "name": "samples-js-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "@okta/okta-react": "^1.0.3",
+    "@okta/okta-signin-widget": "^2.5.0",
+    "colors": "^1.1.2",
+    "cross-env": "^5.1.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env PORT=8080 react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "echo 'Tests not yet implemented' && exit 1",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }

@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Okta.AspNetCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace alpha.mongo.netcore
 {
@@ -78,6 +80,16 @@ namespace alpha.mongo.netcore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseStaticFiles(); // For the wwwroot folder
+
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(
+                        Path.Combine(Directory.GetCurrentDirectory(), "Token")),
+                    RequestPath = "/Token"
+                });
+
             }
             else
             {

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.16.0/js/okta-sign-in.min.js"
+            type="text/javascript"></script>
+    <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.16.0/css/okta-sign-in.min.css"
+          type="text/css"
+          rel="stylesheet" />
+
+    <!-- Theme file: Customize or replace this file if you want to override our default styles -->
+    <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.16.0/css/okta-theme.css"
+          type="text/css"
+          rel="stylesheet" />
+</head>
+<body>
+    <div id="widget-container"></div>
+    <script>
+        var signIn = new OktaSignIn({
+            baseUrl: '{youroktadomain}',
+            clientId: '{yourclientid}',
+            redirectUri: 'https://localhost:44390/token/login.html',
+            authParams: {
+                issuer: 'default',
+                responseType: ['id_token', 'token'],
+                display: 'page'
+            }
+        });
+        if (!signIn.token.hasTokensInUrl()) {
+            signIn.renderEl({ el: '#widget-container' },
+                function () { },
+                function (err) { console.err(err) });
+        }
+        else {
+            signIn.token.parseTokensFromUrl(
+                function success(res) {
+                    // Add the token to tokenManager to automatically renew the token when needed
+                    signIn.tokenManager.add('id_token', res[0]);
+                    signIn.tokenManager.add('access_token', res[1]);
+                    document.getElementById("widget-container").innerHTML=res[1].accessToken;
+                },
+                function error(err) {
+                    console.log('handle error', err);
+                }
+            );
+        }
+    </script>
+
+</body>
+</html>

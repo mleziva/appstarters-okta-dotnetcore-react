@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using System;
 
-namespace alpha.mongo.netcore.Repository
+namespace Alpha.Mongo.Netcore.Repository
 {
     public class AlphaRepository<T> : IAlphaRepository<T>
     {

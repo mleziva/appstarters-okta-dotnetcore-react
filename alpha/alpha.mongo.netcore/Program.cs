@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace alpha.mongo.netcore
+namespace Alpha.Mongo.Netcore
 {
     public class Program
     {

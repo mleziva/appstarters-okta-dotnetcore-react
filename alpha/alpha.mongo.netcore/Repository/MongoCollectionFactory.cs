@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace alpha.mongo.netcore.Repository
+namespace Alpha.Mongo.Netcore.Repository
 {
     public class MongoCollectionFactory
     {

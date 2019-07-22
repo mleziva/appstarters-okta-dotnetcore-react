@@ -15,7 +15,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 
-namespace alpha.mongo.netcore
+namespace Alpha.Mongo.Netcore
 {
     public class Startup
     {

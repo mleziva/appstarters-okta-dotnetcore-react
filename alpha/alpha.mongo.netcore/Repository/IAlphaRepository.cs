@@ -1,4 +1,4 @@
-﻿namespace alpha.mongo.netcore.Repository
+﻿namespace Alpha.Mongo.Netcore.Repository
 {
     public interface IAlphaRepository<T>
     {

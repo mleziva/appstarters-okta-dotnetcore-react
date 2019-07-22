@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "alpha.mongo.netcore", "alpha.mongo.netcore\alpha.mongo.netcore.csproj", "{A186B77B-0E34-4CDF-AC13-3AD264C57524}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alpha.Mongo.Netcore", "alpha.mongo.netcore\Alpha.Mongo.Netcore.csproj", "{A186B77B-0E34-4CDF-AC13-3AD264C57524}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

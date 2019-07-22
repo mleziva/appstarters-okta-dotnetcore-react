@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace alpha.mongo.netcore.Controllers
+namespace Alpha.Mongo.Netcore.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]

@@ -27,9 +27,10 @@ namespace Alpha.Mongo.Netcore.Controllers
 
         // GET: api/Cars/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public Car Get(string id)
         {
-            return "value";
+            return repository.Get(id);
+
         }
 
         // POST: api/Cars
@@ -41,14 +42,16 @@ namespace Alpha.Mongo.Netcore.Controllers
 
         // PUT: api/Cars/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(string id, Car car)
         {
+            repository.Update(id, car);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+            repository.Delete(id);
         }
     }
 }

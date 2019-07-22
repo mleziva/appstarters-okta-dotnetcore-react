@@ -17,6 +17,7 @@ using System.IO;
 using MongoDB.Driver;
 using Alpha.Mongo.Netcore.Repository;
 using Alpha.Mongo.Netcore.Models;
+using MongoDB.Bson;
 
 namespace Alpha.Mongo.Netcore
 {
@@ -56,7 +57,6 @@ namespace Alpha.Mongo.Netcore
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "The Net Core API", Version = "v1" });
-
                 c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.Http,

@@ -7,7 +7,7 @@ namespace Alpha.Mongo.Netcore.Models
 {
     public class PageableRequest
     {
-        private int top;
+        private int top = 1;
         public int Top
         {
             get

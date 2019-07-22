@@ -7,7 +7,18 @@ namespace Alpha.Mongo.Netcore.Models
 {
     public class PageableResponse<T>
     {
-        public int Top { get; set; }
+        private int top = 1;
+        public int Top
+        {
+            get
+            {
+                return top;
+            }
+            set
+            {
+                if (value < 1) { top = 1; } else { top = value; }
+            }
+        }
         public int Skip { get; set; }
         public long Count { get; set; }
         public IEnumerable<T> Items { get; set; }

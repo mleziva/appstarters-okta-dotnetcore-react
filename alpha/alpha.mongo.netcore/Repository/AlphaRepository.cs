@@ -4,7 +4,7 @@ using System;
 
 namespace Alpha.Mongo.Netcore.Repository
 {
-    public class AlphaRepository<T> : IAlphaRepository<T>
+    public class AlphaRepository<T> : IAlphaRepository<T> where T : BsonModel
     {
         private IMongoCollection<T> collection;
         public AlphaRepository(IMongoCollection<T> mongoCollection)
@@ -13,7 +13,10 @@ namespace Alpha.Mongo.Netcore.Repository
         }
         public T Get(string id)
         {
-            throw new NotImplementedException();
+            var stringFilter = createIdFilter(id);
+            var entityStringFiltered = collection.Find(stringFilter);
+            //var stockStringFiltered = await entityStringFiltered.SingleOrDefaultAsync();
+            return entityStringFiltered.SingleOrDefault();
         }
         public PageableResponse<T> Get(PageableRequest pageableRequest)
         {
@@ -31,15 +34,23 @@ namespace Alpha.Mongo.Netcore.Repository
         }
         public void Insert(T insertDocument)
         {
+            insertDocument.Id = null;
             collection.InsertOne(insertDocument);
         }
-        public void Update(T updateDocument)
+        public void Update(string id, T updateDocument)
         {
-            throw new NotImplementedException();
+            updateDocument.Id = id;
+            var stringFilter = createIdFilter(id);
+            var entityStringFiltered = collection.FindOneAndReplace(stringFilter, updateDocument);
         }
         public void Delete(string id)
         {
-            throw new NotImplementedException();
+            var stringFilter = createIdFilter(id);
+            var entityStringFiltered = collection.FindOneAndDelete(stringFilter);
+        }
+        private string createIdFilter(string id)
+        {
+            return "{ _id: ObjectId('" + id + "') }";
         }
     }
 }

@@ -1,13 +1,9 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Alpha.Mongo.Netcore.Repository;
+
 
 namespace Alpha.Mongo.Netcore.Models
 {
-    [BsonIgnoreExtraElements]
-    public class Car
+    public class Car : BsonModel
     {
         public string Make { get; set; }
         public string Model { get; set; }

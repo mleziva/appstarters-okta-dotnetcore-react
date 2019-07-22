@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Alpha.Mongo.Netcore.Models;
+using MongoDB.Driver;
 using System;
 
 namespace Alpha.Mongo.Netcore.Repository
@@ -14,9 +15,8 @@ namespace Alpha.Mongo.Netcore.Repository
         {
             throw new NotImplementedException();
         }
-        public T GetAll()
+        public PageableResponse<T> Get(PageableRequest pageableRequest)
         {
-            //take paging parameter eventually
             throw new NotImplementedException();
         }
         public void Insert(T insertDocument)

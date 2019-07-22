@@ -7,7 +7,29 @@ namespace Alpha.Mongo.Netcore.Models
 {
     public class PageableRequest
     {
-        public int Top { get; set; }
-        public int Skip { get; set; }
+        private int top;
+        public int Top
+        {
+            get
+            {
+                return top;
+            }
+            set
+            {
+                if (value < 1) { top = 1; } else { top = value; }
+            }
+        }
+        private int skip;
+        public int Skip
+        {
+            get
+            {
+                return skip;
+            }
+            set
+            {
+                if (value < 0) { skip = 0; } else { skip = value; }
+            }
+        }
     }
 }

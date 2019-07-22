@@ -6,10 +6,10 @@ namespace Alpha.Mongo.Netcore.Repository
 {
     public class AlphaRepository<T> : IAlphaRepository<T>
     {
-        private IMongoCollection<T> mongoCollection;
+        private IMongoCollection<T> collection;
         public AlphaRepository(IMongoCollection<T> mongoCollection)
         {
-            this.mongoCollection = mongoCollection;
+            this.collection = mongoCollection;
         }
         public T Get(string id)
         {
@@ -17,11 +17,21 @@ namespace Alpha.Mongo.Netcore.Repository
         }
         public PageableResponse<T> Get(PageableRequest pageableRequest)
         {
-            throw new NotImplementedException();
+            var result = collection.Find(FilterDefinition<T>.Empty)
+                .Skip(pageableRequest.Skip)
+                .Limit(pageableRequest.Top)
+                .ToList();
+            return new PageableResponse<T>()
+            {
+                Count = collection.CountDocuments(FilterDefinition<T>.Empty),
+                Items = result,
+                Skip = pageableRequest.Skip,
+                Top = pageableRequest.Top
+            };
         }
         public void Insert(T insertDocument)
         {
-            throw new NotImplementedException();
+            collection.InsertOne(insertDocument);
         }
         public void Update(T updateDocument)
         {

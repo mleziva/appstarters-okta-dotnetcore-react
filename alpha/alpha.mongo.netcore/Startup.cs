@@ -14,6 +14,9 @@ using Okta.AspNetCore;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using MongoDB.Driver;
+using Alpha.Mongo.Netcore.Repository;
+using Alpha.Mongo.Netcore.Models;
 
 namespace Alpha.Mongo.Netcore
 {
@@ -72,6 +75,7 @@ namespace Alpha.Mongo.Netcore
                     }
                 });
             });
+            RegisterDependencies(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -109,6 +113,15 @@ namespace Alpha.Mongo.Netcore
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();
+        }
+        private void RegisterDependencies(IServiceCollection services)
+        {
+            services.AddSingleton(new MongoClient("mongodb://mongodb0.example.com:27017/admin"));
+            services.AddSingleton(new MongoCollectionFactory(new MongoClient("mongodb://localhost:27017/admin"), "firstdb"));
+           //services.AddScoped(c => new MongoCollectionFactory(new MongoClient("mongodb://mongodb0.example.com:27017/admin"), "firstdb").GetCollection<Car>());
+            //services.AddScoped(c => new MongoCollectionFactory(c.GetRequiredService<MongoClient>(), "firstdb").GetCollection<Car>());
+            services.AddScoped(c => c.GetRequiredService<MongoCollectionFactory>().GetCollection<Car>());
+            services.AddScoped<IAlphaRepository<Car>, AlphaRepository<Car>>();
         }
     }
 }

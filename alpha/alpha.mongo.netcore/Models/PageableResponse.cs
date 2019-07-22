@@ -7,23 +7,12 @@ namespace Alpha.Mongo.Netcore.Models
 {
     public class PageableResponse<T>
     {
-        public uint Top { get; set; } = 1;
-        private uint skip;
-        public uint Skip
-        {
-            get
-            {
-                return skip;
-            }
-            set
-            {
-                if (value < 0) { skip = 1; } else { skip = value; }
-            }
-        }
-        public uint Count { get; set; }
+        public int Top { get; set; }
+        public int Skip { get; set; }
+        public long Count { get; set; }
         public IEnumerable<T> Items { get; set; }
-        public uint TotalPages { get => Count / Top; }
+        public long TotalPages { get => Count / Top; }
         //1 based index of current page based on skip and top sizes
-        public uint CurrentPage { get => Skip/Top + 1; }
+        public long CurrentPage { get => Skip/Top + 1; }
     }
 }

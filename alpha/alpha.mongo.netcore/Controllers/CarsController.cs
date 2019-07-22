@@ -20,7 +20,7 @@ namespace Alpha.Mongo.Netcore.Controllers
         }
         // GET: api/Cars
         [HttpGet]
-        public PageableResponse<Car> Get(PageableRequest pageableRequest)
+        public PageableResponse<Car> Get([FromQuery] PageableRequest pageableRequest)
         {
             return repository.Get(pageableRequest);
         }
@@ -34,8 +34,9 @@ namespace Alpha.Mongo.Netcore.Controllers
 
         // POST: api/Cars
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(Car car)
         {
+            repository.Insert(car);
         }
 
         // PUT: api/Cars/5

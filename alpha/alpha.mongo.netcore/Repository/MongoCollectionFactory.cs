@@ -13,8 +13,10 @@ namespace Alpha.Mongo.Netcore.Repository
         }
         public IMongoCollection<T> GetCollection<T>()
         {
+            //My.Namespace.Model.ModelName
             var collectionName = typeof(T).ToString();
-            return GetCollection<T>(collectionName, DefaultDbName);
+            var modelName = collectionName.Substring(collectionName.LastIndexOf('.')+1).ToLower();
+            return GetCollection<T>(modelName, DefaultDbName);
         }
         public IMongoCollection<T> GetCollection<T>(string collectionName)
         {

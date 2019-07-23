@@ -13,5 +13,7 @@ namespace Alpha.Mongo.Netcore.Repository
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+        [BsonIgnoreIfNull]
+        public double? TextMatchScore { get; set; }
     }
 }

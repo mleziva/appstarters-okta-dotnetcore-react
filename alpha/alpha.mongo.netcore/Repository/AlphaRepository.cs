@@ -1,6 +1,7 @@
 ﻿using Alpha.Mongo.Netcore.Models;
 using MongoDB.Driver;
 using System;
+using System.Threading.Tasks;
 
 namespace Alpha.Mongo.Netcore.Repository
 {
@@ -11,19 +12,18 @@ namespace Alpha.Mongo.Netcore.Repository
         {
             this.collection = mongoCollection;
         }
-        public T Get(string id)
+        public async Task<T> Get(string id)
         {
             var stringFilter = createIdFilter(id);
             var entityStringFiltered = collection.Find(stringFilter);
-            //var stockStringFiltered = await entityStringFiltered.SingleOrDefaultAsync();
-            return entityStringFiltered.SingleOrDefault();
+            return await entityStringFiltered.SingleOrDefaultAsync();
         }
-        public PageableResponse<T> Get(PageableRequest pageableRequest)
+        public async Task<PageableResponse<T>> Get(PageableRequest pageableRequest)
         {
-            var result = collection.Find(FilterDefinition<T>.Empty)
+            var result = await collection.Find(FilterDefinition<T>.Empty)
                 .Skip(pageableRequest.Skip)
                 .Limit(pageableRequest.Top)
-                .ToList();
+                .ToListAsync();
             return new PageableResponse<T>()
             {
                 Count = collection.CountDocuments(FilterDefinition<T>.Empty),
@@ -32,21 +32,22 @@ namespace Alpha.Mongo.Netcore.Repository
                 Top = pageableRequest.Top
             };
         }
-        public void Insert(T insertDocument)
+        public async Task<string> Insert(T insertDocument)
         {
             insertDocument.Id = null;
-            collection.InsertOne(insertDocument);
+            await collection.InsertOneAsync(insertDocument);
+            return insertDocument.Id;
         }
-        public void Update(string id, T updateDocument)
+        public async Task Update(string id, T updateDocument)
         {
             updateDocument.Id = id;
             var stringFilter = createIdFilter(id);
-            var entityStringFiltered = collection.FindOneAndReplace(stringFilter, updateDocument);
+            await collection.FindOneAndReplaceAsync(stringFilter, updateDocument);
         }
-        public void Delete(string id)
+        public async Task Delete(string id)
         {
             var stringFilter = createIdFilter(id);
-            var entityStringFiltered = collection.FindOneAndDelete(stringFilter);
+            await collection.FindOneAndDeleteAsync(stringFilter);
         }
         private string createIdFilter(string id)
         {

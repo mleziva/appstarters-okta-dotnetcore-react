@@ -20,38 +20,38 @@ namespace Alpha.Mongo.Netcore.Controllers
         }
         // GET: api/Cars
         [HttpGet]
-        public PageableResponse<Car> Get([FromQuery] PageableRequest pageableRequest)
+        public async Task<PageableResponse<Car>> Get([FromQuery] PageableRequest pageableRequest)
         {
-            return repository.Get(pageableRequest);
+            return await repository.Get(pageableRequest);
         }
 
         // GET: api/Cars/5
         [HttpGet("{id}", Name = "Get")]
-        public Car Get(string id)
+        public async Task<Car> Get(string id)
         {
-            return repository.Get(id);
+            return await repository.Get(id);
 
         }
 
         // POST: api/Cars
         [HttpPost]
-        public void Post(Car car)
+        public async Task<string> Post(Car car)
         {
-            repository.Insert(car);
+            return await repository.Insert(car);
         }
 
         // PUT: api/Cars/5
         [HttpPut("{id}")]
-        public void Put(string id, Car car)
+        public async Task Put(string id, Car car)
         {
-            repository.Update(id, car);
+            await repository.Update(id, car);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public async Task Delete(string id)
         {
-            repository.Delete(id);
+            await repository.Delete(id);
         }
     }
 }

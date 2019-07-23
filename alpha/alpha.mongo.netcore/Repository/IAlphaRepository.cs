@@ -1,13 +1,14 @@
 ﻿using Alpha.Mongo.Netcore.Models;
+using System.Threading.Tasks;
 
 namespace Alpha.Mongo.Netcore.Repository
 {
     public interface IAlphaRepository<T> where T : BsonModel
     {
-        void Delete(string id);
-        T Get(string id);
-        PageableResponse<T> Get(PageableRequest pageableRequest);
-        void Insert(T insertDocument);
-        void Update(string id, T updateDocument);
+        Task Delete(string id);
+        Task<T> Get(string id);
+        Task<PageableResponse<T>> Get(PageableRequest pageableRequest);
+        Task<string> Insert(T insertDocument);
+        Task Update(string id, T updateDocument);
     }
 }

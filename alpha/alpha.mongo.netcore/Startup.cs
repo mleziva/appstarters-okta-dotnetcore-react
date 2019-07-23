@@ -18,6 +18,7 @@ using MongoDB.Driver;
 using Alpha.Mongo.Netcore.Repository;
 using Alpha.Mongo.Netcore.Models;
 using MongoDB.Bson;
+using Alpha.Mongo.Netcore.MIddlware;
 
 namespace Alpha.Mongo.Netcore
 {
@@ -110,6 +111,10 @@ namespace Alpha.Mongo.Netcore
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "The Net Core API V1");
                 c.RoutePrefix = string.Empty;
             });
+            app.UseExceptionHandler(new ExceptionHandlerOptions
+            {
+                ExceptionHandler = new JsonExceptionMiddleware().Invoke
+            });
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();
@@ -121,7 +126,9 @@ namespace Alpha.Mongo.Netcore
            //services.AddScoped(c => new MongoCollectionFactory(new MongoClient("mongodb://mongodb0.example.com:27017/admin"), "firstdb").GetCollection<Car>());
             //services.AddScoped(c => new MongoCollectionFactory(c.GetRequiredService<MongoClient>(), "firstdb").GetCollection<Car>());
             services.AddScoped(c => c.GetRequiredService<MongoCollectionFactory>().GetCollection<Car>());
+            services.AddScoped(c => c.GetRequiredService<MongoCollectionFactory>().GetCollection<Boat>());
             services.AddScoped<IAlphaRepository<Car>, AlphaRepository<Car>>();
+            services.AddScoped<IAlphaRepository<Boat>, AlphaRepository<Boat>>();
         }
     }
 }

@@ -21,6 +21,7 @@ namespace Alpha.Mongo.Netcore.Repository
         public async Task<PageableResponse<T>> Get(PageableRequest pageableRequest)
         {
             var result = await collection.Find(FilterDefinition<T>.Empty)
+                .Sort(CreateSortFromOrderBy(pageableRequest.OrderBy))
                 .Skip(pageableRequest.Skip)
                 .Limit(pageableRequest.Top)
                 .ToListAsync();
@@ -52,6 +53,17 @@ namespace Alpha.Mongo.Netcore.Repository
         private string createIdFilter(string id)
         {
             return "{ _id: ObjectId('" + id + "') }";
+        }
+        private SortDefinition<T> CreateSortFromOrderBy(string orderBy)
+        {
+            if (string.IsNullOrEmpty(orderBy)) return null;
+            var terms = orderBy.Split(" ");
+            var sort = terms[0];
+            if (terms.Length == 2 && terms[1].Equals("desc", StringComparison.OrdinalIgnoreCase)){
+                return Builders<T>.Sort.Descending(sort);
+            }
+            //maybe do something regarding capitalization eventually
+            return Builders<T>.Sort.Ascending(sort);
         }
     }
 }

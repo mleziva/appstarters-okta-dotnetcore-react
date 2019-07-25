@@ -8,7 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Alpha.Mongo.Netcore.MIddlware
+namespace Alpha.Mongo.Netcore.Middlware
 {
     public class JsonExceptionMiddleware
     {

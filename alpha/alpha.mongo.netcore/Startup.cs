@@ -18,7 +18,7 @@ using MongoDB.Driver;
 using Alpha.Mongo.Netcore.Repository;
 using Alpha.Mongo.Netcore.Models;
 using MongoDB.Bson;
-using Alpha.Mongo.Netcore.MIddlware;
+using Alpha.Mongo.Netcore.Middlware;
 
 namespace Alpha.Mongo.Netcore
 {

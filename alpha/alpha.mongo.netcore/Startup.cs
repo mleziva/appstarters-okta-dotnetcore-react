@@ -19,6 +19,7 @@ using Alpha.Mongo.Netcore.Repository;
 using Alpha.Mongo.Netcore.Models;
 using MongoDB.Bson;
 using Alpha.Mongo.Netcore.Middlware;
+using Alpha.Mongo.Netcore.Services;
 
 namespace Alpha.Mongo.Netcore
 {
@@ -129,6 +130,7 @@ namespace Alpha.Mongo.Netcore
             services.AddScoped(c => c.GetRequiredService<MongoCollectionFactory>().GetCollection<Boat>());
             services.AddScoped<IAlphaRepository<Car>, AlphaRepository<Car>>();
             services.AddScoped<IAlphaRepository<Boat>, AlphaRepository<Boat>>();
+            services.AddScoped<IElasticSearch, ElasticSearch>();
         }
     }
 }

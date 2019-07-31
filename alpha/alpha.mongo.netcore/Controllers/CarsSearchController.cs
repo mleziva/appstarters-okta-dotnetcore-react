@@ -20,7 +20,7 @@ namespace Alpha.Mongo.Netcore.Controllers
         }
         [Route("search")]
         [HttpGet]
-        public async Task<PageableResponse<Car>> Get([FromQuery] PageableRequest pageableRequest, string searchTerms, string filters)
+        public async Task<PageableResponse<Car>> Get([FromQuery] SearchQuery searchQuery)
         {
             //GET /indexes/hotel/docs?search=lodging&$filter=City eq ‘Seattle’ and Parking and Type ne ‘motel’
             return await repository.Get(pageableRequest);

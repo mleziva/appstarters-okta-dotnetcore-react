@@ -29,7 +29,7 @@ namespace Alpha.Mongo.Netcore.Test.Integration
                 Make = "Honda",
                 Model = "Civic",
                 Description = "rambunctions alpha banana rooster banana",
-                Year = 1994
+                Year = 1999
             };
             collection.InsertOne(car1);
             //collection.Indexes.CreateOne(new CreateIndexModel<Car>("{'Description':'text'}"));
@@ -42,13 +42,21 @@ namespace Alpha.Mongo.Netcore.Test.Integration
             var filter = Builders<Car>.Filter.Text("Honda");
             var filter1 = Builders<Car>.Filter.Where(x => x.Year == 1994);
             var fitler2 = Builders<Car>.Filter.And(filter, filter1);
+            var filter3 = Builders<Car>.Filter.Eq("Model", "Civic");
+            var fitler4 = Builders<Car>.Filter.And(fitler2, filter3);
             var projection = Builders<Car>.Projection.MetaTextScore("TextMatchScore");
             var sort = Builders<Car>.Sort.MetaTextScore("TextMatchScore");
             var sortedResult = collection
-                .Find(fitler2)
+                .Find(fitler4)
                 .Project<Car>(projection)
                 .Sort(sort)
                 .ToList();
+            var sortedResult1 = collection
+                .Find("{ 'Year': { '$gt' : 1995 , '$lt' : 2000 }, 'Model' : 'Civic' }")
+                .Project<Car>(projection)
+                .Sort(sort)
+                .ToList();
+            
         }
         [TestMethod]
         public void Facets()

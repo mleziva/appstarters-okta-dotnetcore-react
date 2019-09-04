@@ -23,6 +23,7 @@ namespace Alpha.Mongo.Netcore.Controllers
         [HttpGet]
         public async Task<string> Get(object searchQuery)
         {
+            //make this simple
             return await searchService.SearchAsync(searchQuery.ToString());
         }
         [Route("search")]

@@ -12,12 +12,20 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import configureStore from './configureStore';
+import {Provider} from 'react-redux';
 import 'semantic-ui-css/semantic.min.css';
 import App from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
+const store = configureStore();
 /* global document */
 /* eslint-disable react/jsx-filename-extension */
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+        <Provider store={store}>
+            <App />
+        </Provider>
+        , document.getElementById('root')
+);
 registerServiceWorker();

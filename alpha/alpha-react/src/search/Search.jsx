@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import PropTypes from 'prop-types';
-import { Input} from 'semantic-ui-react';
+import { Input, Button, List, Container} from 'semantic-ui-react';
 import config from '.././.config.secret';
 import * as searchAction from '../actions/SearchAction';
 import { connect } from 'react-redux';
@@ -27,8 +27,13 @@ export class Search extends Component {
     console.log(results);
     return (
       <div>
-        <Input placeholder='Search...' />
-        <button text="Search" />
+        <Input placeholder='What are you looking for...' />
+        <Button primary>Search</Button>
+        <Container>
+          <List>
+            {results.map((thing) =>(<List.Item>{thing.firstName} {thing.lastName}</List.Item>))}
+          </List>
+        </Container>
       </div>
     );
   }

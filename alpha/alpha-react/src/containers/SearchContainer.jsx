@@ -5,6 +5,7 @@ import config from '../.config.secret';
 import * as searchAction from '../actions/SearchAction';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import SearchResultItem from '../components/search/SearchResultItem';
 
 export class Search extends Component {
   
@@ -15,8 +16,8 @@ export class Search extends Component {
     };
   }
   componentDidMount() {
-    
-}
+    //check path here and update search box and results with path from url
+  }
 
 
   render() {
@@ -27,7 +28,13 @@ export class Search extends Component {
         <hr/>
         <Container>
           <List>
-            {results.map((thing) =>(<List.Item>{thing.title} {thing.price}</List.Item>))}
+          {results.map(searchResult =>
+          <List.Item>
+            <SearchResultItem
+              key={searchResult.id}
+              searchResult={searchResult}
+              onActionToPerform={() => {console.log(searchResult.id)}} /></List.Item>
+          )}
           </List>
         </Container>
       </div>

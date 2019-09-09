@@ -1,7 +1,7 @@
 import React, { Component, useState} from 'react';
 import PropTypes from 'prop-types';
 import { Input, Button, List, Container} from 'semantic-ui-react';
-import config from '.././.config.secret';
+import config from '../.config.secret';
 import * as searchAction from '../actions/SearchAction';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,12 +15,7 @@ export class Search extends Component {
     };
   }
   componentDidMount() {
-    console.log(this.props);
-    this.props.action.getSearchAction()
-    .catch(error => {
-        console.log(error);
-        //toastr.error(error);
-    });
+    
 }
 
 
@@ -28,10 +23,11 @@ export class Search extends Component {
     const { results } = this.props;
     return (
       <div>
-        <SearchArea history={this.props.history} location={this.props.location}/>
+        <SearchArea history={this.props.history} location={this.props.location} handleSearch={this.props.action.getSearchAction}/>
+        <hr/>
         <Container>
           <List>
-            {results.map((thing) =>(<List.Item>{thing.firstName} {thing.lastName}</List.Item>))}
+            {results.map((thing) =>(<List.Item>{thing.title} {thing.price}</List.Item>))}
           </List>
         </Container>
       </div>
@@ -51,6 +47,11 @@ function SearchArea(props) {
     console.log(props);
     if(props.location.search !== queryString){
       props.history.push("/search"+queryString);
+      props.handleSearch()
+      .catch(error => {
+        console.log(error);
+        //toastr.error(error);
+      });
     }
   };
   return (

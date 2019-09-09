@@ -20,7 +20,7 @@ import CustomLoginComponent from './Login';
 import ApiSamplePage from './ApiSamplePage';
 import Navbar from './Navbar';
 import Profile from './Profile';
-import Search from './search/Search';
+import Search from './containers/SearchContainer';
 
 function customAuthHandler({ history }) {
   // Redirect to the /login page that has a CustomLoginComponent

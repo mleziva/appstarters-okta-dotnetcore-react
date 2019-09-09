@@ -7,7 +7,7 @@ Page is updated
 */
 import * as ActionType from './ActionType';
 //import SearchApi from '../api/SearchApi';
-import SearchApi from '../debug/DebugSearchApi';
+import SearchApi from '../debug/SearchApi';
 import { ApiCallBeginAction, ApiCallErrorAction } from './ApiAction.js';
 
 

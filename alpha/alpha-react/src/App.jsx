@@ -21,6 +21,7 @@ import ApiSamplePage from './ApiSamplePage';
 import Navbar from './Navbar';
 import Profile from './Profile';
 import Search from './containers/SearchContainer';
+import './style/App.css';
 
 function customAuthHandler({ history }) {
   // Redirect to the /login page that has a CustomLoginComponent

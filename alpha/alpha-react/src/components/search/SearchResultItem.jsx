@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import SearchResult from './SearchResult'
+import { Segment} from 'semantic-ui-react';
 
 const SearchResultItem = ({ searchResult, onActionToPerform }) => (
   <div style={{ marginBottom: 20 }}>
+    <Segment>
     <SearchResult
       title={searchResult.title}
       price={searchResult.price}
@@ -13,6 +15,7 @@ const SearchResultItem = ({ searchResult, onActionToPerform }) => (
       disabled={searchResult.inventory > 0 ? '' : 'disabled'}>
       {searchResult.inventory > 0 ? 'Add to cart' : 'Sold Out'}
     </button>
+    </Segment>
   </div>
 )
 

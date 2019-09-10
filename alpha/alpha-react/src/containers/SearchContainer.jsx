@@ -64,8 +64,12 @@ function SearchArea(props) {
   return (
     <div>
       <p>You searched for {search}</p>
-      <Input placeholder='What are you looking for...' onInput={e => setSearch(e.target.value)}  />
-      <Button primary onClick={handleSearch}>Search</Button>
+      <Input fluid action={{
+      color: 'teal',
+      icon: 'search',
+      content: 'Search',
+      onClick: handleSearch
+    }} placeholder='Search...'  onInput={e => setSearch(e.target.value)} />
     </div>
   );
 }

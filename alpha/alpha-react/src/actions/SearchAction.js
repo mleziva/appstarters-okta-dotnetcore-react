@@ -19,12 +19,12 @@ export const getSearchResponse = results => ({
 
 
 
-export function getSearchAction() {
+export function getSearchAction(query) {
     return (dispatch) => {
 
         dispatch(ApiCallBeginAction());
 
-        return SearchApi.getSearch()
+        return SearchApi.getSearch(query)
             .then(results => {
                 dispatch(getSearchResponse(results));
             }).catch(error => {

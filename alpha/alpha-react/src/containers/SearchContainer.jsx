@@ -54,7 +54,7 @@ function SearchArea(props) {
     console.log(props);
     if(props.location.search !== queryString){
       props.history.push("/search"+queryString);
-      props.handleSearch()
+      props.handleSearch(queryString)
       .catch(error => {
         console.log(error);
         //toastr.error(error);

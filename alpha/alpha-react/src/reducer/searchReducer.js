@@ -5,15 +5,16 @@ import _ from 'lodash';
 
 
 const initialState= {searchReducer: {
-    results: []
+    results: [],
+    currentSearch: {}
     }
 }
 const searchReducer = (state = initialState.searchReducer, action) => {
     switch(action.type) {
         case ActionType.GET_SEARCH_RESPONSE: {
             // '...' spread operator clones the state
-            // lodash Object assign simply clones action.courses into a new array.
-            // The return object is a copy of state and overwrites the state.courses with a fresh clone of action.courses
+            // lodash Object assign simply clones action.results into a new array.
+            // The return object is a copy of state and overwrites the state.results with a fresh clone of action.results
             return {
                 ...state, 
                 results: _.assign(action.results)

@@ -12,13 +12,17 @@ export class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searhValue: ''
+      searchValue: '',
+      skip: 0
     };
   }
   componentDidMount() {
     //check path here and update search box and results with path from url
   }
-
+  GetNextPage = () =>{
+    this.state.skip+=25;
+    this.props.action.getSearchAction(this.state.search,25,this.state.skip);
+  }
 
   render() {
     const { results } = this.props;
@@ -37,12 +41,10 @@ export class Search extends Component {
           )}
           </List>
         </Container>
+        <Button onClick={this.GetNextPage}>Load More</Button>
       </div>
     );
   }
-
-  
-
 };
 
 function SearchArea(props) {
@@ -54,7 +56,7 @@ function SearchArea(props) {
     console.log(props);
     if(props.location.search !== queryString){
       props.history.push("/search"+queryString);
-      props.handleSearch(queryString)
+      props.handleSearch(search, 25, 0)
       .catch(error => {
         console.log(error);
         //toastr.error(error);
